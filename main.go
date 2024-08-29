@@ -8,26 +8,34 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"path/filepath"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/joho/godotenv"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"golang.org/x/exp/slices"
 )
 
 func main() {
+	// Load .env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
+	}
+
 	// Read server configuration from environment variables
-	serverPort := ":" + "8080"
+	serverPort := ":" + os.Getenv("SERVER_PORT")
 
 	// Read Minio configuration from environment variables
-	endpoint := "localhost:9000"
-	accessKeyID := "admin"
-	secretAccessKey := "adminpass"
-	useSSL := false
-	bucketName := "einsbym"
+	endpoint := os.Getenv("MINIO_ENDPOINT")
+	accessKeyID := os.Getenv("MINIO_ACCESS_KEY_ID")
+	secretAccessKey := os.Getenv("MINIO_SECRET_ACCESS_KEY")
+	useSSL := os.Getenv("MINIO_USE_SSL") == "true"
+	bucketName := os.Getenv("MINIO_BUCKET_NAME")
 
 	log.Print("usdnkdkfsbb")
 	log.Print(serverPort)
