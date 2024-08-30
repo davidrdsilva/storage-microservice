@@ -37,9 +37,6 @@ func main() {
 	useSSL := os.Getenv("MINIO_USE_SSL") == "true"
 	bucketName := os.Getenv("MINIO_BUCKET_NAME")
 
-	log.Print("usdnkdkfsbb")
-	log.Print(serverPort)
-
 	// Initialize minio client object.
 	minioClient, err := minio.New(endpoint, &minio.Options{
 		Creds:  credentials.NewStaticV4(accessKeyID, secretAccessKey, ""),
